@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quiz</title>
+
+<style>
+body { background:#0f172a; color:white; text-align:center; font-family:Arial; }
+nav { padding:15px; background:#020617; }
+nav a { color:#60a5fa; margin:20px; }
+
+.question {
+  background:#1e293b;
+  margin:20px auto;
+  padding:20px;
+  width:60%;
+  border-radius:10px;
+}
+
+button { padding:10px; margin:5px; }
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">Information</a>
+<a href="graphs.html">Statistics</a>
+<a href="quiz.html">Quiz</a>
+</nav>
+
+<h1>Quiz</h1>
+<div id="score">Score: 0 / 5</div>
+
+<div class="question">
+<p>1. Type of disease?</p>
+<button onclick="ans(this,true)">Noninfectious</button>
+<button onclick="ans(this,false)">Infectious</button>
+</div>
+
+<div class="question">
+<p>2. Risk factor?</p>
+<button onclick="ans(this,true)">Poor diet</button>
+<button onclick="ans(this,false)">Water</button>
+</div>
+
+<div class="question">
+<p>3. Affects?</p>
+<button onclick="ans(this,true)">Blood sugar</button>
+<button onclick="ans(this,false)">Hair</button>
+</div>
+
+<div class="question">
+<p>4. Prevention?</p>
+<button onclick="ans(this,true)">Exercise</button>
+<button onclick="ans(this,false)">Sleep only</button>
+</div>
+
+<div class="question">
+<p>5. Organ affected?</p>
+<button onclick="ans(this,true)">Kidneys</button>
+<button onclick="ans(this,false)">Nails</button>
+</div>
+
+<div id="result"></div>
+
+<script>
+let score = 0;
+let answered = 0;
+const total = 5;
+
+function ans(btn, correct){
+  if(btn.disabled) return;
+
+  let buttons = btn.parentElement.querySelectorAll("button");
+  buttons.forEach(b => b.disabled = true);
+
+  if(correct){
+    score++;
+    btn.style.background = "green";
+  } else {
+    btn.style.background = "red";
+  }
+
+  answered++;
+
+  document.getElementById("score").innerText =
+    "Score: " + score + " / " + total;
+
+  if(answered === total){
+    let percent = Math.round((score / total) * 100);
+    document.getElementById("result").innerText =
+      "Final Score: " + percent + "%";
+  }
+}
+</script>
+
+</body>
+</html>
